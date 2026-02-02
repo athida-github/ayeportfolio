@@ -171,7 +171,7 @@ const Experience = () => {
                   </div>
 
                   <span
-                    className={`transform transition-transform duration-300 text-slate-400 ${
+                    className={`transform transition-transform duration-300 text-slate-100 ${
                       isOpen ? "rotate-90" : ""
                     }`}
                   >

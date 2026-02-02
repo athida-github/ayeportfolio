@@ -52,7 +52,7 @@ const About = () => {
           className="flex flex-wrap gap-4 text-base sm:text-lg text-slate-600"
         >
           {[
-            { label: "DOB", value: "12 March 1991" },
+            { label: "DOB", value: "17 March 1991" },
             { label: "Location", value: "Kyoto, Japan" },
             { label: "Availability", value: "Open to opportunities" },
           ].map((item, index) => (

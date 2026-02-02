@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        // scrolling down
         setHidden(true);
       } else {
-        // scrolling up
         setHidden(false);
       }
 
@@ -35,11 +34,8 @@ const Navbar = () => {
         border-b border-slate-800
       "
     >
-      <div
-        className="max-w-6xl mx-auto px-6 py-4
-                   flex items-center justify-between"
-      >
-        {/* LEFT — LOGO / NAME */}
+      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* LOGO */}
         <a
           href="#"
           className="text-xl font-semibold text-slate-100
@@ -48,21 +44,70 @@ const Navbar = () => {
           Aye<span className="text-orange-400">.</span>
         </a>
 
-        {/* RIGHT — NAV LINKS */}
-        <div className="hidden md:flex items-center gap-8 text-xl">
+        {/* DESKTOP NAV */}
+        <div className="hidden md:flex items-center gap-8 text-lg">
           <NavItem index="01." label="About" href="#about" />
           <NavItem index="02." label="Experience" href="#experience" />
           <NavItem index="03." label="Projects" href="#projects" />
           <NavItem index="04." label="Contact" href="#contact" />
         </div>
+
+        {/* MOBILE BUTTON */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden text-slate-200 focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          <div className="space-y-1.5">
+            <span className="block w-6 h-0.5 bg-slate-200" />
+            <span className="block w-6 h-0.5 bg-slate-200" />
+            <span className="block w-6 h-0.5 bg-slate-200" />
+          </div>
+        </button>
       </div>
+
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="md:hidden bg-slate-900 border-t border-slate-800"
+          >
+            <div className="px-6 py-6 flex flex-col gap-5">
+              <MobileNavItem
+                label="About"
+                href="#about"
+                onClick={() => setMenuOpen(false)}
+              />
+              <MobileNavItem
+                label="Experience"
+                href="#experience"
+                onClick={() => setMenuOpen(false)}
+              />
+              <MobileNavItem
+                label="Projects"
+                href="#projects"
+                onClick={() => setMenuOpen(false)}
+              />
+              <MobileNavItem
+                label="Contact"
+                href="#contact"
+                onClick={() => setMenuOpen(false)}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 };
 
 export default Navbar;
 
-/* Small reusable nav item */
+/* Desktop nav item */
 const NavItem = ({
   index,
   label,
@@ -71,24 +116,40 @@ const NavItem = ({
   index: string;
   label: string;
   href: string;
-}) => {
-  return (
-    <a
-      href={href}
-      className="group flex items-center gap-1
-                 text-slate-400 hover:text-slate-100
-                 transition"
-    >
-      <span className="text-orange-400 text-xs">{index}</span>
-      <span className="relative">
-        {label}
-        {/* underline animation */}
-        <span
-          className="absolute left-0 -bottom-1 w-0 h-px
-                     bg-orange-400 transition-all duration-300
-                     group-hover:w-full"
-        />
-      </span>
-    </a>
-  );
-};
+}) => (
+  <a
+    href={href}
+    className="group flex items-center gap-1
+               text-slate-400 hover:text-slate-100 transition"
+  >
+    <span className="text-orange-400 text-xs">{index}</span>
+    <span className="relative">
+      {label}
+      <span
+        className="absolute left-0 -bottom-1 w-0 h-px
+                   bg-orange-400 transition-all duration-300
+                   group-hover:w-full"
+      />
+    </span>
+  </a>
+);
+
+/* Mobile nav item */
+const MobileNavItem = ({
+  label,
+  href,
+  onClick,
+}: {
+  label: string;
+  href: string;
+  onClick: () => void;
+}) => (
+  <a
+    href={href}
+    onClick={onClick}
+    className="text-slate-200 text-lg
+               hover:text-orange-400 transition"
+  >
+    {label}
+  </a>
+);

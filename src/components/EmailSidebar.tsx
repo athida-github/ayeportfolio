@@ -5,7 +5,7 @@ const EmailSidebar = () => {
       <a
         href="mailto:ayethidasophie@gmail.com"
         className="text-slate-400 hover:text-orange-400
-                   text-2xl tracking-widest hover-lift transition"
+                   text-xl tracking-widest hover-lift transition"
         style={{ writingMode: "vertical-rl" }}
       >
         ayethida.sophie@gmail.com

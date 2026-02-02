@@ -8,7 +8,7 @@ import {
 
 const SocialSidebar = () => {
   // 🔹 WhatsApp configuration
-  const phoneNumber = "817089763940"; // ← replace with YOUR number (Japan: 81)
+  const phoneNumber = "817089763940"; // Japan: 81
   const message = `Hello Aye Thida,
 
 I found your portfolio and would like to connect with you.
@@ -19,7 +19,7 @@ Thank you!`;
   )}`;
 
   // 🔹 LINE
-  const lineId = "aye_sohpie"; // ← e.g. ayethida
+  const lineId = "aye_sohpie";
   const lineMessage = `Hello Aye Thida,
 
 I found your portfolio and would like to connect with you.
@@ -30,69 +30,144 @@ Thank you!`;
   )}`;
 
   return (
-    <div className="fixed left-3 lg:left-6 bottom-0 hidden md:flex flex-col items-center gap-5 z-50">
-      {/* GitHub */}
-      <a
-        href="https://github.com/yourusername"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-slate-400 hover:text-orange-400
-                   text-4xl hover:-translate-y-1 transition"
-        aria-label="GitHub"
-      >
-        <FaGithub />
-      </a>
+    <>
+      {/* ================= DESKTOP SIDEBAR ================= */}
+      <div className="fixed left-3 lg:left-6 bottom-0 hidden md:flex flex-col items-center gap-5 z-50">
+        <SocialIcon
+          href="https://github.com/yourusername"
+          label="GitHub"
+          color="hover:text-orange-400"
+        >
+          <FaGithub />
+        </SocialIcon>
 
-      {/* WhatsApp */}
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-slate-400 hover:text-green-400
-                   text-4xl hover:-translate-y-1 transition"
-        aria-label="WhatsApp"
-      >
-        <FaWhatsapp />
-      </a>
+        <SocialIcon
+          href={whatsappUrl}
+          label="WhatsApp"
+          color="hover:text-green-400"
+        >
+          <FaWhatsapp />
+        </SocialIcon>
 
-      {/* LINE */}
-      <a
-        href={lineUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-slate-400 hover:text-green-500
-                   text-4xl hover:-translate-y-1 transition"
-        aria-label="LINE"
-      >
-        <FaLine />
-      </a> 
+        <SocialIcon
+          href={lineUrl}
+          label="LINE"
+          color="hover:text-green-500"
+        >
+          <FaLine />
+        </SocialIcon>
 
-      {/* LinkedIn */}
-      <a
-        href="https://www.linkedin.com/in/aye-thida-a9b8762a2"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-slate-400 hover:text-blue-400
-                   text-4xl hover:-translate-y-1 transition"
-        aria-label="LinkedIn"
-      >
-        <FaLinkedinIn />
-      </a>
+        <SocialIcon
+          href="https://www.linkedin.com/in/aye-thida-a9b8762a2"
+          label="LinkedIn"
+          color="hover:text-blue-400"
+        >
+          <FaLinkedinIn />
+        </SocialIcon>
 
-      {/* Email */}
-      <a
-        href="mailto:ayethidasophie@gmail.com?subject=Portfolio Contact"
-        className="text-slate-400 hover:text-orange-400
-                   text-4xl hover:-translate-y-1 transition"
-        aria-label="Email"
-      >
-        <FaEnvelope />
-      </a>
+        <SocialIcon
+          href="mailto:ayethidasophie@gmail.com?subject=Portfolio Contact"
+          label="Email"
+          color="hover:text-orange-400"
+        >
+          <FaEnvelope />
+        </SocialIcon>
 
-      {/* vertical line */}
-      <div className="w-px h-24 bg-slate-400 mt-2"></div>
-    </div>
+        {/* vertical line */}
+        <div className="w-px h-24 bg-slate-400 mt-2" />
+      </div>
+
+      {/* ================= MOBILE BOTTOM BAR ================= */}
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 md:hidden">
+        <div
+          className="
+            flex items-center gap-5
+            px-5 py-3 rounded-full
+            bg-slate-900/90 backdrop-blur
+            border border-slate-700
+            shadow-lg
+          "
+        >
+          <MobileIcon href="https://github.com/yourusername" label="GitHub">
+            <FaGithub />
+          </MobileIcon>
+
+          <MobileIcon href={whatsappUrl} label="WhatsApp">
+            <FaWhatsapp />
+          </MobileIcon>
+
+          <MobileIcon href={lineUrl} label="LINE">
+            <FaLine />
+          </MobileIcon>
+
+          <MobileIcon
+            href="https://www.linkedin.com/in/aye-thida-a9b8762a2"
+            label="LinkedIn"
+          >
+            <FaLinkedinIn />
+          </MobileIcon>
+
+          <MobileIcon
+            href="mailto:ayethidasophie@gmail.com?subject=Portfolio Contact"
+            label="Email"
+          >
+            <FaEnvelope />
+          </MobileIcon>
+        </div>
+      </div>
+    </>
   );
 };
 
 export default SocialSidebar;
+
+/* ================= REUSABLE COMPONENTS ================= */
+
+const SocialIcon = ({
+  href,
+  label,
+  color,
+  children,
+}: {
+  href: string;
+  label: string;
+  color: string;
+  children: React.ReactNode;
+}) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={label}
+    className={`
+      text-slate-400 text-3xl
+      ${color}
+      hover:-translate-y-1 transition
+    `}
+  >
+    {children}
+  </a>
+);
+
+const MobileIcon = ({
+  href,
+  label,
+  children,
+}: {
+  href: string;
+  label: string;
+  children: React.ReactNode;
+}) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={label}
+    className="
+      text-slate-300 text-xl
+      hover:text-orange-400 transition
+    "
+  >
+    {children}
+  </a>
+);
