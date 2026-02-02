@@ -1,246 +1,108 @@
-import { useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { initialComments, type Comment } from "../data/Comment-data";
-
-const STORAGE_KEY = "portfolio-comments";
-const COMMENTS_PER_PAGE = 3;
+import { useState } from "react";
+import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import { initialComments } from "../data/Comment-data";
 
 const Comments = () => {
-  /* ----------------------------------
-     STATE
-  ----------------------------------- */
-  const [comments, setComments] = useState<Comment[]>(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) return JSON.parse(stored);
-
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(initialComments));
-    return initialComments;
-  });
-
-  const [currentPage, setCurrentPage] = useState(1);
-
-  /* ----------------------------------
-     STORAGE SYNC
-  ----------------------------------- */
-  useEffect(() => {
-    const onStorageChange = () => {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) setComments(JSON.parse(stored));
-    };
-
-    window.addEventListener("storage", onStorageChange);
-    return () => window.removeEventListener("storage", onStorageChange);
-  }, []);
-
-  /* ----------------------------------
-     APPROVED + SORTED
-  ----------------------------------- */
-  const approvedComments = useMemo(
-    () =>
-      comments
-        .filter((c) => c.approved)
-        .sort((a, b) => b.date.localeCompare(a.date)),
-    [comments]
-  );
-
-  const total = approvedComments.length;
-  const totalPages = Math.ceil(total / COMMENTS_PER_PAGE);
-
-  const paginatedComments = useMemo(() => {
-    const start = (currentPage - 1) * COMMENTS_PER_PAGE;
-    return approvedComments.slice(start, start + COMMENTS_PER_PAGE);
-  }, [approvedComments, currentPage]);
-
-  /* ----------------------------------
-     FORM STATE
-  ----------------------------------- */
   const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [name, setName] = useState("");
+  const [email, setEmail] = useState(""); // 👈 NEW
   const [role, setRole] = useState("");
   const [message, setMessage] = useState("");
 
-  /* ----------------------------------
-     SUBMIT REQUEST
-  ----------------------------------- */
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
-    const newComment: Comment = {
-      id: Date.now(),
-      name,
-      role,
-      message,
-      approved: false,
-      date: new Date().toISOString().split("T")[0],
-    };
+    try {
+      await emailjs.send(
+        "service_htphdmk",
+        "template_jt17frl",
+        {
+          name,
+          email, // 👈 SEND EMAIL
+          role,
+          message,
+          date: new Date().toLocaleDateString(),
+        },
+        "KQC0pk7HZ4Du2_tXB"
+      );
 
-    const updated = [...comments, newComment];
-    setComments(updated);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      alert("Thank you! Your recommendation has been sent for review.");
 
-    setName("");
-    setRole("");
-    setMessage("");
-    setShowForm(false);
-
-    alert("Thank you. Your recommendation is pending review.");
+      setName("");
+      setEmail("");
+      setRole("");
+      setMessage("");
+      setShowForm(false);
+    } catch {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <section id="comments" className="relative py-28 px-6">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* HEADER */}
-        <div className="mb-14 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-14 flex justify-between items-end">
           <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-100">
-              What People Say
+            <h2 className="text-3xl font-semibold text-slate-100">
+              Professional Recommendations
             </h2>
-            {/* Animated underline */}
-            <motion.div
-              initial={{ width: 0 }}
-              whileInView={{ width: "200px" }}
-              transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
-              className="mt-4 h-[2px] bg-orange-400"
-            />
             <p className="mt-2 text-slate-400 max-w-xl">
-              Professional feedback from colleagues, supervisors, and collaborators.
+              Feedback from colleagues and collaborators.
             </p>
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
+          <button
             onClick={() => setShowForm(true)}
-            className="
-              px-4 py-2 rounded-md text-sm font-medium
-              border border-slate-200 text-slate-300 bg-slate-900/50
-              hover:border-slate-500 hover:text-slate-100
-            "
+            className="px-4 py-2 rounded-md border border-slate-700 text-slate-200 hover:border-orange-400"
           >
             Request Recommendation
-          </motion.button>
+          </button>
         </div>
 
-        {/* META */}
-        {total > 0 && (
-          <p className="mb-10 text-sm text-slate-500">
-            Showing{" "}
-            <span className="font-medium text-slate-300">
-              {paginatedComments.length}
-            </span>{" "}
-            of{" "}
-            <span className="font-medium text-slate-300">
-              {total}
-            </span>{" "}
-            recommendations
-          </p>
-        )}
-
-        {/* COMMENTS (ANIMATED PAGE SWITCH) */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentPage}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="space-y-8"
-          >
-            {total === 0 && (
-              <p className="text-slate-500">
-                No approved recommendations yet.
-              </p>
-            )}
-
-            {paginatedComments.map((comment, index) => (
-              <motion.div
+        {/* APPROVED COMMENTS ONLY */}
+        <div className="space-y-8">
+          {initialComments
+            .filter((c) => c.approved)
+            .map((comment) => (
+              <div
                 key={comment.id}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.06 }}
-                className="
-                  relative overflow-hidden rounded-xl
-                  border border-slate-800
-                  bg-slate-900/60 backdrop-blur
-                  px-6 py-6
-                "
+                className="rounded-xl border border-slate-800 bg-slate-900/60 px-6 py-6"
               >
-                {/* Accent */}
-                <div className="absolute left-0 top-0 h-full w-1 bg-slate-600/40" />
+                <p className="text-slate-300">“{comment.message}”</p>
 
-                <p className="text-slate-300 leading-relaxed text-[15px]">
-                  “{comment.message}”
-                </p>
-
-                <div className="mt-5 flex items-center justify-between">
-                  <div>
-                    <p className="font-medium text-slate-100">
-                      {comment.name}
-                    </p>
-                    <p className="text-sm text-slate-400">
-                      {comment.role}
-                    </p>
-                  </div>
-
-                  <p className="text-xs text-slate-500">
-                    {new Date(comment.date).toLocaleDateString()}
+                <div className="mt-4">
+                  <p className="text-slate-500 font-semibold">
+                    {comment.name}
+                  </p>
+                  <p className="text-sm text-slate-600 italic">
+                    {comment.email}
+                  </p>
+                  <p className="text-sm text-slate-600 italic">
+                    {comment.role}
+                  </p>
+                  <p className="text-xs text-slate-600 italic">
+                    {comment.date}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* PAGINATION (PROJECT-LIKE ANIMATION) */}
-        {totalPages > 1 && (
-          <div className="mt-14 flex items-center justify-between">
-            <motion.button
-              whileHover={{ x: -2 }}
-              whileTap={{ scale: 0.95 }}
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage((p) => p - 1)}
-              className="
-                px-4 py-2 text-sm rounded-md
-                border border-slate-700 text-slate-300
-                disabled:opacity-40 disabled:cursor-not-allowed
-              "
-            >
-              Previous
-            </motion.button>
-
-            <motion.span
-              key={currentPage}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-sm text-slate-500"
-            >
-              Page {currentPage} of {totalPages}
-            </motion.span>
-
-            <motion.button
-              whileHover={{ x: 2 }}
-              whileTap={{ scale: 0.95 }}
-              disabled={currentPage === totalPages}
-              onClick={() => setCurrentPage((p) => p + 1)}
-              className="
-                px-4 py-2 text-sm rounded-md
-                border border-slate-700 text-slate-300
-                disabled:opacity-40 disabled:cursor-not-allowed
-              "
-            >
-              Next
-            </motion.button>
-          </div>
-        )}
+        </div>
       </div>
 
       {/* MODAL */}
       {showForm && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4">
           <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="w-full max-w-md rounded-xl border border-slate-800 bg-slate-900 p-6 shadow-xl"
+            initial={{ scale: 0.96, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-slate-900 p-6 rounded-xl w-full max-w-lg border border-slate-800"
           >
             <h3 className="text-lg font-semibold text-slate-100 mb-4">
               Request a Recommendation
@@ -252,7 +114,22 @@ const Comments = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Your Name"
-                className="w-full rounded-md px-3 py-2 bg-slate-950 border border-slate-700 text-slate-200"
+                className="w-full px-3 py-2 rounded-md
+                           bg-slate-950 border border-slate-700
+                           text-slate-200 focus:outline-none
+                           focus:border-orange-400"
+              />
+
+              <input
+                required
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your Email Address"
+                className="w-full px-3 py-2 rounded-md
+                           bg-slate-950 border border-slate-700
+                           text-slate-200 focus:outline-none
+                           focus:border-orange-400"
               />
 
               <input
@@ -260,32 +137,45 @@ const Comments = () => {
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
                 placeholder="Your Role / Organization"
-                className="w-full rounded-md px-3 py-2 bg-slate-950 border border-slate-700 text-slate-200"
+                className="w-full px-3 py-2 rounded-md
+                           bg-slate-950 border border-slate-700
+                           text-slate-200 focus:outline-none
+                           focus:border-orange-400"
               />
 
               <textarea
                 required
+                rows={4}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Your message"
-                rows={4}
-                className="w-full rounded-md px-3 py-2 bg-slate-950 border border-slate-700 text-slate-200"
+                className="w-full px-3 py-2 rounded-md
+                           bg-slate-950 border border-slate-700
+                           text-slate-200 focus:outline-none
+                           focus:border-orange-400"
               />
+
+              <p className="text-xs text-slate-500">
+                Your email will not be displayed publicly.
+              </p>
 
               <div className="flex justify-end gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="text-sm text-slate-400 hover:text-slate-200"
+                  className="text-slate-400 hover:text-slate-200"
                 >
                   Cancel
                 </button>
 
                 <button
+                  disabled={loading}
                   type="submit"
-                  className="px-4 py-2 text-sm rounded-md bg-slate-100 text-slate-900 hover:bg-white"
+                  className="px-4 py-2 rounded-md
+                             bg-orange-400 text-black
+                             hover:bg-orange-300 transition"
                 >
-                  Submit
+                  {loading ? "Sending..." : "Submit"}
                 </button>
               </div>
             </form>
