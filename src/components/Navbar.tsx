@@ -49,7 +49,8 @@ const Navbar = () => {
           <NavItem index="01." label="About" href="#about" />
           <NavItem index="02." label="Experience" href="#experience" />
           <NavItem index="03." label="Projects" href="#projects" />
-          <NavItem index="04." label="Contact" href="#contact" />
+          <NavItem index="04." label="Recommendation" href="#comments" />
+          <NavItem index="05." label="Contact" href="#contact" />
         </div>
 
         {/* MOBILE BUTTON */}
@@ -90,6 +91,11 @@ const Navbar = () => {
               <MobileNavItem
                 label="Projects"
                 href="#projects"
+                onClick={() => setMenuOpen(false)}
+              />
+              <MobileNavItem
+                label="Recommendation"
+                href="#comments"
                 onClick={() => setMenuOpen(false)}
               />
               <MobileNavItem
