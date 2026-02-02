@@ -77,7 +77,7 @@ const Comments = () => {
             </h2>
             <motion.div
               initial={{ width: 0 }}
-              whileInView={{ width: "210px" }}
+              whileInView={{ width: "200px" }}
               transition={{ duration: 0.7, ease: "easeInOut", delay: 0.15 }}
               className="mt-3 h-[2px] bg-orange-400"
             />
@@ -88,7 +88,7 @@ const Comments = () => {
 
           <button
             onClick={() => setShowForm(true)}
-            className="px-4 py-2 rounded-md border border-slate-700 text-slate-200 hover:border-orange-400 transition"
+            className="px-4 py-2 rounded-md border bg-slate-800 border-slate-700 text-slate-200 hover:border-orange-400 transition"
           >
             Request Recommendation
           </button>
@@ -222,7 +222,7 @@ const Comments = () => {
                 required
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                placeholder="Your Role / Organization"
+                placeholder="Your Role / Organization (e.g., Manager at XYZ Corp)"
                 className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 text-slate-200 rounded-md"
               />
 
