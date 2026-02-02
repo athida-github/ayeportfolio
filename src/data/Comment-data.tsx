@@ -13,13 +13,13 @@ export type Comment = {
 export const initialComments: Comment[] = [
   {
     id: 1,
-    name: "Dr. Hiroshi Tanaka",
-    email: "hiroshi.tanaka@kcgi.ac.jp", // optional
-    role: "Professor, KCGI",
+    name: "Hnin Thet Htet Wai",
+    email: "hninthethtettwai@gmail.com", // optional
+    role: "Assistant Vice President, Technology Data and Information Department, MAB Bank",
     message:
-      "Aye Thida is highly reliable, detail-oriented, and works exceptionally well in collaborative environments.",
-    approved: false,
-    date: "2024-11-10",
+      "I am more than pleased to have the opportunity to recommend Aye. I had worked very closely with Aye about 3 years collaborating in MMS, SVBO system migration projects and daily operation issues in Information and communication department at KBZ bank. She is dedicated, self motivated and very capable. Aye is always capable of adapting to new working environment. Very positive attitude towards work. As a team member or my colleague , Aye earns my highest recommendation.",
+    approved: true,
+    date: "2026-02-02",
   },
   {
     id: 2,

@@ -119,7 +119,49 @@ const experiences: ExperienceItem[] = [
     "Jira",
     "Microsoft Office"
   ]
+},
+{
+  role: "Teaching Assistant (Part-time)",
+  company: "ULU",
+  location: "Japan",
+  period: "Feb 2025 – Current",
+  summary:
+    "Supported English language learning program for children by assisting teachers with classroom activities and providing interactive learning support.",
+  responsibilities: [
+    "Assisted teachers during English lessons and interactive activities",
+    "Prepared educational materials, worksheets, and games for students",
+    "Monitored student participation and progress during lessons",
+    "Provided individual guidance to students struggling with language skills",
+    "Organized fun and engaging language exercises to enhance learning"
+  ],
+  tech: [
+    "Microsoft Office",
+    "Google Workspace",
+    "Educational Apps for Kids",
+    "Classroom Management Tools"
+  ]
+},
+{
+  role: "Teaching Assistant (Part-time)",
+  company: "KCGI",
+  location: "Japan",
+  period: "Oct 2025 – Current",
+  summary:
+    "Assisted in delivering the Special Visual Effect course by supporting students in practical exercises and helping with course materials.",
+  responsibilities: [
+    "Guided students during hands-on exercises and practical assignments",
+    "Assisted in providing constructive feedback",
+    "Supported the instructor during lectures and demonstrations",
+    "Answered student queries and provided technical support for software tools"
+  ],
+  tech: [
+    "Google Workspace",
+    "DaVinci Resolve",
+    "Microsoft Office"
+  ]
 }
+
+
 
 ];
 

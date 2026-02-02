@@ -149,11 +149,12 @@ const Comments = () => {
                     </p>
 
                     <div className="mt-4">
-                      <p className="text-slate-100 font-semibold">
+                      <p className="text-orange-200 font-semibold">
                         {comment.name}
                       </p>
-                      <p className="text-sm text-slate-400">{comment.role}</p>
-                      <p className="text-xs text-slate-500">{comment.date}</p>
+                      <p className="text-sm italic text-orange-200">{comment.email}</p>
+                      <p className="text-sm italic text-orange-200">{comment.role}</p>
+                      <p className="text-xs italic text-orange-200">{comment.date}</p>
                     </div>
                   </div>
                 ))}
