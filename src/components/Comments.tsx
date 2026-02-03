@@ -35,36 +35,52 @@ const Comments = () => {
 
   /* ---------------- SUBMIT ---------------- */
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      await emailjs.send(
-        "service_htphdmk",
-        "template_jt17frl",
-        {
-          name,
-          role,
-          email,
-          message,
-          date: new Date().toLocaleDateString(),
-        },
-        "KQC0pk7HZ4Du2_tXB"
-      );
+  try {
+    /* 1️⃣ Send recommendation to YOU */
+    await emailjs.send(
+      "service_htphdmk",
+      "template_jt17frl", // admin / review template
+      {
+        name,
+        role,
+        email,
+        message,
+        date: new Date().toLocaleDateString(),
+      },
+      "KQC0pk7HZ4Du2_tXB"
+    );
 
-      alert("Thank you! Your recommendation has been sent for review.");
+    /* 2️⃣ Auto-reply email to USER */
+    await emailjs.send(
+      "service_htphdmk",
+      "template_m9vhczg", // new template
+      {
+        name,
+        email,
+      },
+      "KQC0pk7HZ4Du2_tXB"
+    );
 
-      setName("");
-      setRole("");
-      setEmail("");
-      setMessage("");
-      setShowForm(false);
-    } catch {
-      alert("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    alert(
+      "Thank you! Your recommendation has been sent.\nA confirmation email has been sent to you."
+    );
+
+    setName("");
+    setRole("");
+    setEmail("");
+    setMessage("");
+    setShowForm(false);
+  } catch (error) {
+    alert("Something went wrong. Please try again.");
+    console.error(error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <section id="comments" className="relative py-16 sm:py-28 px-4 sm:px-6">

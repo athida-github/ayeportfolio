@@ -88,7 +88,7 @@ Thank you!`;
             shadow-lg
           "
         >
-          <MobileIcon href="https://github.com/yourusername" label="GitHub">
+          <MobileIcon href="https://github.com/athida-github" label="GitHub">
             <FaGithub />
           </MobileIcon>
 
