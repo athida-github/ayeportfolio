@@ -15,7 +15,7 @@ export const initialComments: Comment[] = [
     id: 1,
     name: "Hnin Thet Htet Wai",
     email: "hninthethtettwai@gmail.com", // optional
-    role: "Assistant Vice President, Technology Data and Information Department, MAB Bank",
+    role: "Assistant Vice President, Technology Data and Information Department, MAB Bank, Myanmar",
     message:
       "I am more than pleased to have the opportunity to recommend Aye. I had worked very closely with Aye about 3 years collaborating in MMS, SVBO system migration projects and daily operation issues in Information and communication department at KBZ bank. She is dedicated, self motivated and very capable. Aye is always capable of adapting to new working environment. Very positive attitude towards work. As a team member or my colleague , Aye earns my highest recommendation.",
     approved: true,
@@ -23,23 +23,23 @@ export const initialComments: Comment[] = [
   },
   {
     id: 2,
-    name: "Senior IT Manager",
-    email: "it.manager@kbzbank.com",
-    role: "KBZ Bank",
+    name: "Sameera ABAR",
+    email: "s_abar@kcg.ac.jp",
+    role: "Professor, KCGI, University of Informatics, Japan",
     message:
-      " It is my pleasure to write in support of the application of Mr. Ian Harris for your residency program.  I have been an educator for decades with considerable experience with national organizations.  I worked closely with Mr. Harris during his third year clerkship as well as during his acting internship.   As is evident from his CV, Mr. Harris has excelled throughout his career with many notable accomplishments which I will not repeat here.  I will focus on my experiences with Mr. Harris, primarily those related to his clinical abilities and which demonstrate the qualities necessary for your residency: excellent knowledge, clinical skills, patient care, and leadership.  I have observed Mr. Harris in both the inpatient and outpatient setting, taught him in class, and overseen his performance during his clerkship and acting internship.",
-    approved: false,
-    date: "2025-01-05",
+      " I highly recommend Ms. Aye Thida, who successfully completed the Advanced Web Programming 3 course with an A+ grade. Throughout the course, Aye Thida demonstrated exceptional technical ability, robust problem-solving skills, and a deep understanding of advanced web development concepts. She was consistently regular, disciplined, and punctual, and completed all assignments with accuracy and efficiency. Her ability to grasp complex ideas quickly and apply them creatively in practical implementations truly set her apart. Aye is a brilliant and motivated learner, and I'm confident she will excel in any advanced academic or professional environment.",
+    approved: true,
+    date: "2026-02-03",
   },
   {
     id: 3,
-    name: "Manager",
-    email: "ayethida.sophie@gmail.com",
-    role: "KBZ Bank",
+    name: "Matej Drdla",
+    email: "drdla@kcg.edu",
+    role: "Instructor, Object-Oriented Programming (Java), KCGI",
     message:
-      "Strong coordination skills and very dependable during system integration phases.",
-    approved: false,
-    date: "2026-02-02",
+      "Aye is a highly motivated and very capable student who consistently demonstrated both strong technical ability and an excellent work ethic. She was actively engaged in class, regularly volunteered to contribute, and always went beyond the required preparation. Her enthusiasm for learning and dedication to improvement truly set her apart, and I am confident she has a bright future in software development.",
+    approved: true,
+    date: "2026-02-03",
   },
   {
     id: 4,
