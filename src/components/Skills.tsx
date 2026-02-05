@@ -31,7 +31,7 @@ const skillGroups = [
     items: [
       "HTML, CSS, JavaScript",
       "React (Basic to Intermediate)",
-      "Java (Fundamental)",
+      "Java, Python, Kotlin (Fundamental)",
       "REST API Consumption & Integration",
       "Web Application Structure & Component Design",
     ],
@@ -60,16 +60,20 @@ const Skills = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease }}
         >
-          <h2 className="text-3xl font-semibold text-slate-700">
-            Skills & Proficiencies
-          </h2>
+          <div className="inline-block">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-700">
+              Skills & Proficiencies
+            </h2>
+            {/* Animated underline */}
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+              className="mt-3 h-[2px] bg-orange-400"
+            />
+          </div>
 
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "250px" }}
-            transition={{ duration: 0.7, ease, delay: 0.15 }}
-            className="mt-3 h-[2px] bg-orange-400"
-          />
+          
 
           <p className="mt-3 text-base text-slate-600 max-w-2xl">
             A combination of professional, technical, and development skills.

@@ -146,16 +146,18 @@ const Works = () => {
     <Reveal>
       <section id="projects" className="max-w-7xl mx-auto px-4 py-32">
         {/* Title */}
-        <h2 className="text-2xl sm:text-3xl font-bold text-slate-700">
-          Projects
-        </h2>
-
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: "88px" }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mt-4 h-[2px] bg-orange-400 mb-10"
-        />
+        <div className="inline-block">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-700">
+              Projects
+            </h2>
+            {/* Animated underline */}
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+              className="mt-3 h-[2px] bg-orange-400 mb-14"
+            />
+          </div>
 
         {/* 🔹 Category Filter */}
         <div className="flex flex-wrap gap-3 mb-14">
@@ -217,7 +219,7 @@ const Works = () => {
                     </div>
 
                     <span
-                      className={`transition-transform text-slate-400 ${
+                      className={`transition-transform text-slate-300 ${
                         isOpen ? "rotate-90" : ""
                       }`}
                     >

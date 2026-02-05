@@ -88,15 +88,21 @@ const Comments = () => {
         {/* HEADER */}
         <div className="mb-12 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-semibold text-slate-100">
+            {/* <h2 className="text-2xl sm:text-3xl font-semibold text-slate-100">
+              What People Say
+            </h2> */}
+            <div className="inline-block">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-300">
               What People Say
             </h2>
+            {/* Animated underline */}
             <motion.div
               initial={{ width: 0 }}
-              whileInView={{ width: "200px" }}
-              transition={{ duration: 0.7, ease: "easeInOut", delay: 0.15 }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
               className="mt-3 h-[2px] bg-orange-400"
             />
+          </div>
             <p className="mt-2 text-slate-400 max-w-xl text-sm sm:text-base">
               Feedback from colleagues and collaborators.
             </p>

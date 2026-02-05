@@ -175,16 +175,18 @@ const Experience = () => {
         className="max-w-7xl mx-auto px-4 py-32"
       >
         {/* Section title */}
-        <h2 className="text-2xl sm:text-3xl font-bold text-slate-700">
-          Experience
-        </h2>
-        {/* Animated underline */}
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "140px" }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-4 h-[2px] bg-orange-400 mb-14"
-          />
+          <div className="inline-block">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-700">
+              Experience
+            </h2>
+            {/* Animated underline */}
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+              className="mt-3 h-[2px] bg-orange-400 mb-14"
+            />
+          </div>
 
         <div className="space-y-6">
           {experiences.map((exp, index) => {

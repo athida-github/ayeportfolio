@@ -50,16 +50,18 @@ const Education = () => {
             },
           }}
         >
-          <h2 className="text-3xl font-semibold text-slate-700">
-            Education, Certifications & Awards
-          </h2>
+          <div className="inline-block">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-700">
+              Education, Certifications & Awards
+            </h2>
 
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "430px" }}
-            transition={{ duration: 0.7, ease, delay: 0.15 }}
-            className="mt-3 h-[2px] bg-orange-400"
-          />
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+              className="mt-3 h-[2px] bg-orange-400"
+            />
+          </div>
 
           <p className="mt-3 text-base text-slate-600 max-w-2xl">
             Academic background and professional qualifications.
@@ -88,10 +90,10 @@ const Education = () => {
               className="relative"
             >
               {/* Timeline dot */}
-              <span className="absolute -left-[9px] top-[6px] w-2.5 h-2.5 rounded-full bg-slate-400" />
+              <span className="absolute -left-[9px] top-[6px] w-2.5 h-2.5 rounded-full bg-slate-400  shrink-0" />
 
-              <p className="text-base font-medium text-slate-800 leading-snug">
-                {item.title}
+              <p className="text-base font-medium text-slate-800 leading-snug shrink-0">
+                <span>&nbsp;{item.title}</span>
               </p>
               <p className="mt-0.5 text-sm text-slate-600">
                 {item.place}

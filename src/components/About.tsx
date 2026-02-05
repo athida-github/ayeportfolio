@@ -28,17 +28,24 @@ const About = () => {
           }}
           className="mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-700">
+          {/* <h2 className="text-2xl sm:text-3xl font-bold text-slate-700">
             About
-          </h2>
+          </h2> */}
+          <div className="inline-block">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-700">
+              About
+            </h2>
+            {/* Animated underline */}
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+              className="mt-3 h-[2px] bg-orange-400"
+            />
+          </div>
 
-          {/* Animated underline */}
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "82px" }}
-            transition={{ duration: 0.8, ease, delay: 0.2 }}
-            className="mt-4 h-[2px] bg-orange-400"
-          />
+          
+          
         </motion.div>
 
         {/* PROFILE INFO */}

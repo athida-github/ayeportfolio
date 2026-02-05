@@ -68,14 +68,27 @@ const Contact = () => {
         >
           {/* HEADER */}
           <div className="text-center mb-10">
-            <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight">
+            {/* <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight">
               Let&apos;s work together
-            </h2>
+            </h2> */}
 
             {/* <p className="mt-4 text-slate-400 leading-relaxed">
               Have a project in mind or want to collaborate?
               Send me a message and I’ll get back to you within 24 hours.
             </p> */}
+            <div className="inline-block">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-300">
+              Let&apos;s work together
+            </h2>
+            {/* Animated underline */}
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: "100%" }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+              className="mt-3 h-[2px] bg-orange-400"
+            />
+          </div>
+            
           </div>
 
           {/* FORM */}
