@@ -42,13 +42,16 @@ export const initialComments: Comment[] = [
     date: "2026-02-03",
   },
   {
-    id: 4,
-    name: "Manager",
-    email: "ayethida.sophie@gmail.com",
-    role: "KBZ Bank",
-    message:
-      "Strong coordination skills and very dependable during system integration phases.",
-    approved: false,
-    date: "2026-02-02",
-  },
+  id: 4,
+  name: "SAN KHAING PHYO",
+  email: "sankp@sankhaingphyo.com",
+  role: "Head of IT at Tun Commercial Bank Limited, Myanmar",
+  message: `I worked closely with Aye Thida during the Temenos T24 Core Banking implementation at Myanmar Oriental Bank, and she was a vital contributor to the project's success.
+
+Aye Thida demonstrated exceptional technical depth across the most critical phases of the implementation. She was instrumental in managing complex Data Migration workflows, ensuring accuracy and system integrity during the transition. Furthermore, her expertise in T24 Parameterization and her diligent approach to UAT Functional Testing ensured that the system was not only technically sound but perfectly aligned with the bank’s operational requirements.
+
+She has a remarkable talent for navigating the high-pressure environment of a core banking rollout with poise and precision. Aye Thida is a rare professional who understands both the 'how' and the 'why' of banking technology. I highly recommend her to any organization looking for a specialist who can deliver results in complex digital transformations.`,
+  approved: true,
+  date: "2026-02-05",
+}
 ];
