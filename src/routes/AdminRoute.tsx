@@ -1,3 +1,4 @@
+<!---
 import { Navigate } from "react-router-dom";
 //import { useAuth } from "../context/useAuth";
 import {useAuth} from "../Context/useAuth";
@@ -9,3 +10,4 @@ const AdminRoute = ({ children }: { children: JSX.Element }) => {
 };
 
 export default AdminRoute;
+--!>>
