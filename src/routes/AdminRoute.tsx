@@ -1,7 +1,7 @@
 
 import { Navigate } from "react-router-dom";
-//import { useAuth } from "../context/useAuth";
-import {useAuth} from "../Context/useAuth";
+import { useAuth } from "../context/useAuth";
+
 import type { JSX } from "react";
 
 const AdminRoute = ({ children }: { children: JSX.Element }) => {
