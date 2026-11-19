@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom";
 //import { useAuth } from "../context/useAuth";
+import {useAuth} from "../Context/useAuth";
 import type { JSX } from "react";
 
 const AdminRoute = ({ children }: { children: JSX.Element }) => {
-  //const { role } = useAuth();
+  const { role } = useAuth();
   return role === "admin" ? children : <Navigate to="/login" replace />;
 };
 
